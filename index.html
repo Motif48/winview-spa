@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WinView — Home</title>
+  <meta name="description" content="WinView — simple demo website with Home, About and Contact." />
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#9aa6b2;
+      --accent:#3b82f6;
+      --glass: rgba(255,255,255,0.03);
+      --radius:14px;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#071226);color:#e6eef6}
+    a{color:var(--accent);text-decoration:none}
+    header{backdrop-filter: blur(6px);position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(7,18,38,0.45), rgba(7,18,38,0.2));border-bottom:1px solid rgba(255,255,255,0.03)}
+    .container{max-width:1100px;margin:0 auto;padding:20px}
+
+    /* Nav */
+    .nav{display:flex;align-items:center;gap:16px;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.1rem}
+    .brand .logo{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#06b6d4);display:grid;place-items:center;color:#021020;font-weight:800}
+    nav ul{display:flex;gap:12px;list-style:none;padding:0;margin:0}
+    nav li{padding:8px 12px;border-radius:10px}
+    nav li.active{background:var(--glass)}
+    .btn-primary{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;border:0;cursor:pointer}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center;padding:50px 0}
+    .hero h1{font-size:2.2rem;margin:0 0 12px}
+    .lead{color:var(--muted);line-height:1.5}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:var(--radius);box-shadow:0 6px 20px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
+
+    /* Features */
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+    .feature{padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02)}
+    .feature h4{margin:0 0 8px}
+    .small{font-size:0.9rem;color:var(--muted)}
+
+    /* Sections */
+    section{padding:70px 0}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+
+    /* Contact */
+    form{display:grid;gap:10px}
+    input,textarea{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:12px;border-radius:10px;color:inherit;font-size:1rem}
+    textarea{min-height:120px;resize:vertical}
+    .muted{color:var(--muted);font-size:0.95rem}
+
+    /* Social links */
+    .social-links{display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+    .social-links a{display:flex;align-items:center;gap:6px;color:var(--accent);transition: transform 0.2s, filter 0.2s;}
+    .social-links a:hover{transform:scale(1.1);filter:drop-shadow(0 0 4px var(--accent));}
+
+    /* Footer */
+    footer{padding:26px 0;color:var(--muted);text-align:center;border-top:1px solid rgba(255,255,255,0.02)}
+
+    /* Responsive */
+    @media (max-width:880px){
+      .hero{grid-template-columns:1fr;}
+      .features{grid-template-columns:repeat(2,1fr)}
+      .about-grid{grid-template-columns:1fr}
+    }
+    @media (max-width:520px){
+      html{font-size:14px}
+      .features{grid-template-columns:1fr}
+      nav ul{display:none}
+    }
+
+    .text-center{text-align:center}
+    .mb-8{margin-bottom:32px}
+    .mt-6{margin-top:24px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo">W</div>
+        <div>
+          <div>WinView</div>
+          <div class="muted" style="font-size:0.8rem">View wins. Share stories.</div>
+        </div>
+      </div>
+
+      <nav>
+        <ul id="navList">
+          <li data-target="home" class="active">Home</li>
+          <li data-target="about">About</li>
+          <li data-target="contact">Contact</li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+ 
+        <aside>
+          <div class="card">
+            <h3 style="margin-top:0">Get started</h3>
+            <p class="muted">Click on the links below to now more about winview and how to contact us.</p>
+            <div style="margin-top:14px;display:flex;gap:10px">
+              <button class="btn-primary" onclick="scrollToSection('contact')">Contact us</button>
+              <a class="btn-secondary" href="#about" style="align-self:center;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04)">Learn more</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="about-grid">
+        <div>
+          <h2>About WinView</h2>
+          <p class="lead">WinView started as a small idea.Over time winview has grown to be one of the most highly rated spa around Nairobi.All this was made ppossible by our friendly technicians with high skills that leaves clients with a smile on their face</p>
+           <img src="image.png" width="200" height="300">
+           <img src="pic2.jpeg" width="200" height="300">
+           <iframe src="https://www.google.com/maps/embed?pb=!1m26!1m12!1m3!1d250.7288750069075!2d36.916859301247705!3d-1.2725583601667858!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m11!3e6!4m3!3m2!1d-1.2724715!2d36.916972099999995!4m5!1s0x182f151a56575ba5%3A0x5114adb78d444ff8!2sWINVIEW%20SUPER%20SPA%2C%20Nairobi!3m2!1d-1.2724682999999999!2d36.916962999999996!5e0!3m2!1sen!2ske!4v1775414067782!5m2!1sen!2ske" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+           </iframe>
+          <h3 class="mt-6">Our mission</h3>
+          <p class="muted">To keep our clients clean and give them a feeling of confidence at all times.</p>
+
+          <h3 class="mt-6">Team</h3>
+          <p class="small">We have a great and well team of nail techs under a manager/owner</p>
+        </div>
+
+        <div>
+          <div class="card">
+            <h3 style="margin-top:0">Why choose WinView?</h3>
+            <ul class="muted">
+              <li>Perfect Customer Service</li>
+              <li>Fast performance</li>
+              <li>Privacy-first defaults</li>
+            </ul>
+            <div class="mt-6">
+              <strong>Stack</strong>
+              <p class="muted">HTML, CSS and vanilla JavaScript — easy to port to frameworks later.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="card">
+        <h2>Contact Us</h2>
+        <p class="muted">Have a question or want to work together? Reach us directly or send a message below.</p>
+
+        <div class="social-links">
+          <a href="https://wa.me/+254702263087">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--accent)" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.15-.198.297-.767.967-.94 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.173.198-.297.297-.495.099-.198.05-.372-.025-.521-.074-.149-.67-1.611-.916-2.206-.242-.579-.487-.501-.67-.51-.173-.008-.372-.01-.571-.01s-.521.074-.794.372c-.273.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.1 3.2 5.077 4.487.709.306 1.262.489 1.693.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414-.074-.124-.273-.198-.57-.347z"/>
+              <path d="M12 2C6.486 2 2 6.486 2 12c0 2.115.552 4.094 1.52 5.815L2 22l4.44-1.486A9.959 9.959 0 0012 22c5.514 0 10-4.486 10-10S17.514 2 12 2z"/>
+            </svg>
+            +254702263087
+          </a>
+
+          <a href="https://www.instagram.com/winvi.ew?igsh=aWpnZ3VjOGJwYXdt&utm_source=ig_contact_invite">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--accent)" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.97.24 2.433.403a4.92 4.92 0 011.675 1.093 4.92 4.92 0 011.093 1.674c.163.463.35 1.263.403 2.433.058 1.267.07 1.647.07 4.851s-.012 3.584-.07 4.85c-.054 1.17-.24 1.97-.403 2.433a4.92 4.92 0 01-1.093 1.675 4.92 4.92 0 01-1.675 1.093c-.463.163-1.263.35-2.433.403-1.267.058-1.647.07-4.851.07s-3.584-.012-4.85-.07c-1.17-.054-1.97-.24-2.433-.403a4.92 4.92 0 01-1.675-1.093 4.92 4.92 0 01-1.093-1.675c-.163-.463-.35-1.263-.403-2.433C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.054-1.17.24-1.97.403-2.433a4.92 4.92 0 011.093-1.675 4.92 4.92 0 011.675-1.093c.463-.163 1.263-.35 2.433-.403C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.014 7.052.072 5.777.13 4.657.312 3.712.657a6.919 6.919 0 00-2.503 1.641A6.919 6.919 0 00.657 4.8c-.345.945-.527 2.065-.585 3.34C.014 8.332 0 8.741 0 12c0 3.259.014 3.668.072 4.948.058 1.275.24 2.395.585 3.34a6.919 6.919 0 001.641 2.503 6.919 6.919 0 002.503 1.641c.945.345 2.065.527 3.34.585C8.332 23.986 8.741 24 12 24s3.668-.014 4.948-.072c1.275-.058 2.395-.24 3.34-.585a6.919 6.919 0 002.503-1.641 6.919 6.919 0 001.641-2.503c.345-.945.527-2.065.585-3.34.058-1.28.072-1.689.072-4.948s-.014-3.668-.072-4.948c-.058-1.275-.24-2.395-.585-3.34a6.919 6.919 0 00-1.641-2.503A6.919 6.919 0 0019.288.657c-.945-.345-2.065-.527-3.34-.585C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998zm6.406-11.845a1.44 1.44 0 11-2.879 0 1.44 1.44 0 012.879 0z"/>
+            </svg>
+            Instagram
+          </a>
+        </div>
+
+        <form id="contactForm" onsubmit="return handleSubmit(event)">
+          <label class="muted">Name</label>
+          <input id="name" type="text" placeholder="Your full name" required />
+          <label class="muted">Email</label>
+          <input id="email" type="email" placeholder="you@example.com" required />
+          <label class="muted">Message</label>
+          <textarea id="message" placeholder="Tell us about your project or question..." required></textarea>
+
+          <div style="display:flex;gap:10px;align-items:center;margin-top:8px">
+            <button type="submit" class="btn-primary">Send message</button>
+            <div id="formStatus" class="muted">We’ll reply within 1–2 business days.</div>
+          </div>
+        </form>
+      </div>
+    </section>
+<section class="booking">
+        <h2>Book Appointment</h2>
+        <form id="bookingForm">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="tel" id="phone" placeholder="Phone Number" required>
+            <input type="date" id="date" required>
+            <button type="submit">Book Now</button>
+        </form>
+        <p id="message"></p>
+    </section>
+
+    <script src="script.js"></script>
+    <footer>
+      <div class="container">
+        <div>© <span id="year"></span> WinView. Built by Motif.</div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const form = document.getElementById('bookingForm');
+const message = document.getElementById('message');
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value;
+
+    message.textContent = "Thank you " + name + "! Your appointment is booked 💖";
+    form.reset();
+});
+    // Small SPA-like navigation
+    const navItems = document.querySelectorAll('#navList li');
+    const sections = Array.from(document.querySelectorAll('main section'));
+    function setActive(targetId){navItems.forEach(li=> li.classList.toggle('active', li.dataset.target===targetId));
+    }
+
+    function scrollToSection(id){
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.scrollIntoView({behavior:'smooth',block:'start'});
+      setActive(id);
+    }
+
+    navItems.forEach(li=> li.addEventListener('click', ()=> scrollToSection(li.dataset.target)));
+
+    // update year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // contact form (client-side) — simple validation + fake send
+    function handleSubmit(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const status = document.getElementById('formStatus');
+
+      // Minimal validation
+      if(name.length < 2){ status.textContent = 'Please provide a valid name.'; return false; }
+      if(!/^\S+@\S+\.\S+$/.test(email)){ status.textContent = 'Please provide a valid email.'; return false; }
+      if(message.length < 10){ status.textContent = 'Message is a bit short. Tell us more.'; return false; }
+
+      // Simulate send
+      status.textContent = 'Sending...';
+      setTimeout(()=>{
+        status.textContent = 'Thanks, we received your message — we will get back to you!';
+        document.getElementById('contactForm').reset();
+      }, 900);
+      return false;
+    }
+
+    // Optional: update active nav on scroll
+    const observer = new IntersectionObserver(entries =>{
+      entries.forEach(entry =>{
+        if(entry.isIntersecting){
+          setActive(entry.target.id);
+        }
+      });
+    }, {threshold:0.45});
+    sections.forEach(s=> observer.observe(s));
+  </script>
+</body>
+</html>
