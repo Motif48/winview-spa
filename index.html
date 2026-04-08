@@ -168,31 +168,17 @@
           </a>
         </div>
 
-        <form id="contactForm" onsubmit="return handleSubmit(event)">
-          <label class="muted">Name</label>
-          <input id="name" type="text" placeholder="Your full name" required />
-          <label class="muted">Email</label>
-          <input id="email" type="email" placeholder="you@example.com" required />
-          <label class="muted">Message</label>
-          <textarea id="message" placeholder="Tell us about your project or question..." required></textarea>
-
-          <div style="display:flex;gap:10px;align-items:center;margin-top:8px">
-            <button type="submit" class="btn-primary">Send message</button>
-            <div id="formStatus" class="muted">We’ll reply within 1–2 business days.</div>
-          </div>
+        <form id="bookingForm">
+         <input type="text" id="b_name" placeholder="Your Name" required>
+         <input type="text" id="b_message" placeholder="Write tour message here" required>
+         <input type="date" id="b_date" required>
+         <button type="submit">Book Now</button>
         </form>
+
+<p id="bookingStatus"></p>
       </div>
     </section>
-<section class="booking">
-        <h2>Book Appointment</h2>
-        <form id="bookingForm">
-            <input type="text" id="name" placeholder="Your Name" required>
-            <input type="tel" id="phone" placeholder="Phone Number" required>
-            <input type="date" id="date" required>
-            <button type="submit">Book Now</button>
-        </form>
-        <p id="message"></p>
-    </section>
+
 
     <script src="script.js"></script>
     <footer>
@@ -202,67 +188,37 @@
     </footer>
   </main>
 
-  <script>
-    const form = document.getElementById('bookingForm');
-const message = document.getElementById('message');
+ <script>
+const form = document.getElementById('bookingForm');
 
-form.addEventListener('submit', function(e) {
-    e.preventDefault();
+form.addEventListener('submit', function(e){
+  e.preventDefault();
 
-    const name = document.getElementById('name').value;
+  const params = {
+    name: document.getElementById("b_name").value,
+    message: document.getElementById("b_message").value,
+    date: document.getElementById("b_date").value
+  };
 
-    message.textContent = "Thank you " + name + "! Your appointment is booked 💖";
-    form.reset();
+  emailjs.send("service_iv40lq7", "template_kzkki4l", params)
+    .then(function() {
+      document.getElementById("bookingStatus").textContent = "✅ Booking sent successfully!";
+      form.reset();
+    })
+    .catch(function(error) {
+      document.getElementById("bookingStatus").textContent = "❌ Failed to send booking";
+      console.error(error);
+    });
 });
-    // Small SPA-like navigation
-    const navItems = document.querySelectorAll('#navList li');
-    const sections = Array.from(document.querySelectorAll('main section'));
-    function setActive(targetId){navItems.forEach(li=> li.classList.toggle('active', li.dataset.target===targetId));
-    }
+</script>
 
-    function scrollToSection(id){
-      const el = document.getElementById(id);
-      if(!el) return;
-      el.scrollIntoView({behavior:'smooth',block:'start'});
-      setActive(id);
-    }
-
-    navItems.forEach(li=> li.addEventListener('click', ()=> scrollToSection(li.dataset.target)));
-
-    // update year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // contact form (client-side) — simple validation + fake send
-    function handleSubmit(e){
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const message = document.getElementById('message').value.trim();
-      const status = document.getElementById('formStatus');
-
-      // Minimal validation
-      if(name.length < 2){ status.textContent = 'Please provide a valid name.'; return false; }
-      if(!/^\S+@\S+\.\S+$/.test(email)){ status.textContent = 'Please provide a valid email.'; return false; }
-      if(message.length < 10){ status.textContent = 'Message is a bit short. Tell us more.'; return false; }
-
-      // Simulate send
-      status.textContent = 'Sending...';
-      setTimeout(()=>{
-        status.textContent = 'Thanks, we received your message — we will get back to you!';
-        document.getElementById('contactForm').reset();
-      }, 900);
-      return false;
-    }
-
-    // Optional: update active nav on scroll
-    const observer = new IntersectionObserver(entries =>{
-      entries.forEach(entry =>{
-        if(entry.isIntersecting){
-          setActive(entry.target.id);
-        }
-      });
-    }, {threshold:0.45});
-    sections.forEach(s=> observer.observe(s));
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+(function(){
+ emailjs.init("jSCN5__GFPZwCk4lN");
+})();
+</script>
 </body>
 </html>
